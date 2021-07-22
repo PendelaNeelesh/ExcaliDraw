@@ -1,0 +1,10 @@
+extends layout.pug
+block content
+    script(type="module" src="/js/toDownload.js")
+    link(rel="stylesheet" href="/css/toDownload.css")
+    link(rel = "stylesheet" href="/css/allImages.css")
+    div#Fname
+        h1=rows[0].filename
+    each n in rows
+        a(href=`/download/?name=${n.filename}&ver=${n.version}`)
+            button=n.version

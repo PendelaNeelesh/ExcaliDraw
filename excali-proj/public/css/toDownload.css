@@ -1,0 +1,24 @@
+h1{
+    text-align: center;
+    color: blue;
+    font-family: 'Courier New', Courier, monospace;
+}
+a{
+    min-width: 50px;
+    width: fit-content;
+    height: 45px;
+    background-image: inherit;
+    background-color: inherit;
+}
+button{
+    min-width: 50px;
+    width: fit-content;
+    height: 25px;
+    background-color: inherit;
+    background-image: inherit;
+    margin:10px;
+}
+button:hover{
+    cursor: pointer;
+    background-color: blue ;
+}

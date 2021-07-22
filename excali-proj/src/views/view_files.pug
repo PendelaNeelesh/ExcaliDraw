@@ -1,0 +1,17 @@
+extends layout.pug
+block content
+    link(rel = "stylesheet" href="/css/allImages.css")
+    .searchDiv
+        input(type="text" id="searchElement" placeholder="Filename")
+        input(type="button" id="submitElement" onClick="myfunction()" value="search")
+    script(src="js/toVersions.js")
+            
+    table
+        tr 
+            th File-name 
+            th No-of-Versions
+        each n in rows 
+            tr 
+                th
+                    a(id=`${n.filename}` href=`/getVer/?name=${n.filename}`)=n.filename 
+                th=n.TotalImages
