@@ -50,7 +50,7 @@ const App = () => {
   return React.createElement(
     React.Fragment,
     null,
-    React.createElement(
+    React.createElement( //Click to see all Files
       "div",
       { className: "button-wrapper" },
       React.createElement(
@@ -59,7 +59,7 @@ const App = () => {
         },
         "See All Images"
       ),
-      React.createElement(
+      React.createElement( // Click to start Saving..
         "button",{
           className: "SaveButton",
           onClick:async ()=>{
@@ -149,7 +149,7 @@ const App = () => {
         'Start Saving..',
 
       ),
-      React.createElement(
+      React.createElement( // Click to stop saving
         "button",{
           className: "dontSaveButton",
           onClick: async ()=>{
@@ -193,7 +193,7 @@ const App = () => {
         },
         'stop saving..',
       ),
-      React.createElement(
+      React.createElement(//Update scene
         "button",
         {
           className: "update-scene",
@@ -209,7 +209,7 @@ const App = () => {
         },
         "Reset Scene"
       ),
-      React.createElement(
+      React.createElement( //viewMode
         "label",
         null,
         React.createElement("input", {
@@ -219,7 +219,7 @@ const App = () => {
         }),
         "View mode"
       ),
-      React.createElement(
+      React.createElement(//Zen mode
         "label",
         null,
         React.createElement("input", {
@@ -229,7 +229,7 @@ const App = () => {
         }),
         "Zen mode"
       ),
-      React.createElement(
+      React.createElement(//gridmode
         "label",
         null,
         React.createElement("input", {
@@ -240,7 +240,7 @@ const App = () => {
         "Grid mode"
       )
     ),
-    React.createElement(
+    React.createElement( //Canvas or the drawing area
       "div",
       {
         className: "excalidraw-wrapper",
