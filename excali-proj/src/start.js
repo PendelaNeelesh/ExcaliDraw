@@ -1,10 +1,10 @@
 const express = require('express');
 const newapp = express();
 const path = require('path');
-newapp.use(express.static('../public'));
+newapp.use(express.static('../public')); // Setting up static files
 qs = require('querystring');
 var mysql = require('mysql')
-var connection = mysql.createConnection({ //Connection Details
+var connection = mysql.createConnection({ //Connection Details till line 16
     host: 'localhost',
     user: 'root',
     password: 'password',
@@ -21,7 +21,7 @@ newapp.set('view engine','pug');
 newapp.get('/', (req,res)=>{
     res.sendFile(path.join(__dirname +'/first.html' ));
 });
-newapp.post('/saveImage',(req,res)=>{
+newapp.post('/saveImage',(req,res)=>{ //Saving SVG data from request
     
     var body='';
             req.on('data', function (data) {
@@ -44,7 +44,7 @@ newapp.post('/saveImage',(req,res)=>{
 
 });
 
-newapp.get('/allImages',(req,res)=>{
+newapp.get('/allImages',(req,res)=>{ //Display all files in dataBase
     var img;
     let getAllQuery = "SELECT filename,COUNT(version) as TotalImages FROM svg_data GROUP BY filename";
     connection.query(getAllQuery,(err,rows,fields)=>{
@@ -54,7 +54,7 @@ newapp.get('/allImages',(req,res)=>{
     })
 })
 
-newapp.get('/getVer',(req,res)=>{
+newapp.get('/getVer',(req,res)=>{ //Display all versions of a specified file
     let svgQuery = "SELECT filename, version FROM svg_data WHERE filename='"+req.query.name+"';";
     connection.query(svgQuery,(err,rows,fields)=>{
         if(err){
@@ -65,7 +65,7 @@ newapp.get('/getVer',(req,res)=>{
         })
 })
 
-newapp.get('/download',(req,res)=>{
+newapp.get('/download',(req,res)=>{ //Download a specific version of a file
     
     let svgGetQuery = "SELECT svgData FROM svg_data WHERE filename='"+req.query.name+"' AND version='"+req.query.ver+"';";
     console.log(svgGetQuery);
@@ -80,7 +80,7 @@ newapp.get('/download',(req,res)=>{
 
 
 })
-port = process.env.PORT || 3000;
+port = process.env.PORT || 8000; //Listening on port...
 newapp.listen(port,()=>{
     console.log(`Listening on port ${port}.....`) 
 }); 
