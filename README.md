@@ -1,6 +1,8 @@
 # ExcaliDraw
 Project given by EntHire
 
+**To see a demo video [click here](https://h-vd.io/OkqmewNk)**
+
 **#Deploying in your machine:**
 - Clone this repository
 - open [excali-draw](https://github.com/PendelaNeelesh/ExcaliDraw/tree/main/excali-proj) folder in your localmachine
