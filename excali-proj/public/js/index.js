@@ -3,6 +3,8 @@ import InitialData from "./initialData.js";
 var saveClicks =1;
 var stopClicks =0;
 var doesExist =0;
+var version;
+var fname;
 var xyz;
 const App = () => {
   const excalidrawRef = React.useRef(null);
@@ -62,9 +64,9 @@ const App = () => {
           className: "SaveButton",
           onClick:async ()=>{
               if(saveClicks-stopClicks === 1){
-                  
-              var fname = window.prompt("Enter the name of the file: ")
-              var version =0;
+              fname = undefined;    
+              fname = window.prompt("Enter the name of the file: ")
+              version =0;
               if(fname){
                 saveClicks++;
                 const svg = await window.Excalidraw.exportToSvg({
@@ -76,7 +78,6 @@ const App = () => {
                     },
                     embedScene: true
                   });
-                  console.log(typeof svg.outerHTML);
                   $.ajax({
                     url: '/saveImage',
                     type: "POST",
@@ -88,7 +89,6 @@ const App = () => {
                     },
                     dataType: "application/json",
                     success: function (data) {
-                        console.log('data');
                     },
                     error: function (jqXHR, exception) {
                       alert("File Name Already exists"); 
@@ -103,13 +103,7 @@ const App = () => {
                   var ele = excalidrawRef.current.getSceneElements();
                   if(doesExist==0){
                     xyz = setInterval(async () => {
-                      console.log("Ready at");
-                      let t = new Date();
-                      console.log(
-                        t.getHours() + ":" + t.getMinutes() + ":" + t.getSeconds()
-                      );
                       if (ele !== excalidrawRef.current.getSceneElements()) {
-                        console.log("not equal");
                         const svg = await window.Excalidraw.exportToSvg({
                           elements: excalidrawRef.current.getSceneElements(),
                           appState: {
@@ -130,10 +124,8 @@ const App = () => {
                           },
                           dataType: "application/json",
                           success: function (data) {
-                              console.log('data');
                           },
                           error: function (jqXHR, exception) {
-                            console.log('abc');
                               console.log(`Error ${jqXHR.status}`+ exception);
                           }
                       });
@@ -160,14 +152,36 @@ const App = () => {
       React.createElement(
         "button",{
           className: "dontSaveButton",
-          onClick: ()=>{
+          onClick: async ()=>{
             if(saveClicks-stopClicks === 2){
                 saveClicks--;
-                setTimeout(async () =>{
-                 await clearTimeout(xyz);
+                const svg = await window.Excalidraw.exportToSvg({
+                  elements: excalidrawRef.current.getSceneElements(),
+                  appState: {
+                    ...InitialData.appState,
+                    width: 300,
+                    height: 100
+                  },
+                  embedScene: true
+                });
+                $.ajax({
+                  url: '/saveImage',
+                  type: "POST",
+                  data: {
+                      svgText: svg.outerHTML,
+                      Filename: fname,
+                      ver: version++
+                      
+                  },
+                  dataType: "application/json",
+                  success: function (data) {
+                  },
+                  error: function (jqXHR, exception) {
+                      console.log(`Error ${jqXHR.status}`+ exception);
+                  }
+              });
+               clearTimeout(xyz);
                  console.log('Cleared Time');
-
-                },10000);
                 window.alert('Saving is Stopped');
             }
             else{
