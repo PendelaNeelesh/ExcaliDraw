@@ -11,6 +11,6 @@ Project given by EntHire
  
 **#Make Sure:**
 - You are using **My Sql Database**
-- to change database connection details's in [start.js] from line 7(https://github.com/PendelaNeelesh/ExcaliDraw/blob/main/excali-proj/src/start.js) or configure your database as in [start.js](https://github.com/PendelaNeelesh/ExcaliDraw/blob/main/excali-proj/src/start.js).
+- to change database connection details's in [start.js](https://github.com/PendelaNeelesh/ExcaliDraw/blob/main/excali-proj/src/start.js) from line 7 or configure your database as in [start.js](https://github.com/PendelaNeelesh/ExcaliDraw/blob/main/excali-proj/src/start.js).
 - that all privilege are given to the user.
 - to create a table in database using `CREATE TABLE svg_data (filename VARCHAR(20), version VARCHAR(20), svgData MEDIUMTEXT, PRIMARY KEY (filename,version));`
