@@ -80,8 +80,8 @@ newapp.get('/download',(req,res)=>{
 
 
 })
-port = process.env.PORT || 8080;
+port = process.env.PORT || 3000;
 newapp.listen(port,()=>{
     console.log(`Listening on port ${port}.....`) 
-});
+}); 
 
