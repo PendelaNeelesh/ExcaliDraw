@@ -4,6 +4,16 @@ const path = require('path');
 newapp.use(express.static('../public'));
 qs = require('querystring');
 var mysql = require('mysql')
+var connection = mysql.createConnection({ //Connection Details
+    host: 'localhost',
+    user: 'root',
+    password: 'password',
+    database: 'excali_svg_base'
+});
+connection.connect( (err) =>{
+    if(err) throw err;
+    console.log('Connected to database');
+});
 
 
 newapp.set('views',path.join(__dirname,"./views"));
@@ -12,16 +22,7 @@ newapp.get('/', (req,res)=>{
     res.sendFile(path.join(__dirname +'/first.html' ));
 });
 newapp.post('/saveImage',(req,res)=>{
-    var connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: 'password',
-        database: 'excali_svg_base'
-    });
-    connection.connect( (err) =>{
-        if(err) throw err;
-        console.log('Connected to database');
-    });
+    
     var body='';
             req.on('data', function (data) {
                 body +=data;
@@ -44,16 +45,6 @@ newapp.post('/saveImage',(req,res)=>{
 });
 
 newapp.get('/allImages',(req,res)=>{
-    var connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: 'password',
-        database: 'excali_svg_base'
-    });
-    connection.connect( (err) =>{
-        if(err) throw err;
-        console.log('Connected to database');
-    });
     var img;
     let getAllQuery = "SELECT filename,COUNT(version) as TotalImages FROM svg_data GROUP BY filename";
     connection.query(getAllQuery,(err,rows,fields)=>{
@@ -64,16 +55,6 @@ newapp.get('/allImages',(req,res)=>{
 })
 
 newapp.get('/getVer',(req,res)=>{
-    var connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: 'password',
-        database: 'excali_svg_base'
-    });
-    connection.connect( (err) =>{
-        if(err) throw err;
-        console.log('Connected to database');
-    });
     let svgQuery = "SELECT filename, version FROM svg_data WHERE filename='"+req.query.name+"';";
     connection.query(svgQuery,(err,rows,fields)=>{
         if(err){
@@ -85,16 +66,6 @@ newapp.get('/getVer',(req,res)=>{
 })
 
 newapp.get('/download',(req,res)=>{
-    var connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: 'password',
-        database: 'excali_svg_base'
-    });
-    connection.connect( (err) =>{
-        if(err) throw err;
-        console.log('Connected to database');
-    });
     
     let svgGetQuery = "SELECT svgData FROM svg_data WHERE filename='"+req.query.name+"' AND version='"+req.query.ver+"';";
     console.log(svgGetQuery);
